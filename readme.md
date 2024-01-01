@@ -1,10 +1,23 @@
-### Install dependences
+### Installing Virtual Environment
+
 ```bash
-pip install -r requiredments.txt`
+python -m venv fastapi-venv
+```
+
+### Activate the Environment
+
+```bash
+source fastapi-venv/bin/activate
+```
+
+### Install dependences
+
+```bash
+pip install -r requiredments.txt
 ```
 
 ### Starting the Server
 
 ```bash
-uvicorn main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8000
 ```
