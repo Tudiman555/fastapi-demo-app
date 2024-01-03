@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI, HTTPException, status
 from app.database import SessionLocal
 from sqlalchemy.orm import Session
-from app.schemas.blog import CreateBlog
+from app.schemas.blog import CreateBlog, UpdateBlog
 from app.models import Blog 
 
 app = FastAPI()
@@ -49,12 +49,13 @@ def delete(id: int, db: Session = Depends(get_db)):
     db.commit()
     return 'Done'
 
-# @app.put("/blog/{id}", status_code=status.HTTP_202_ACCEPTED)
-# def update(id: int, blog: UpdateBlog, db: Session = Depends(get_db)):
-#     updated_blog = db.query(Blog).filter(Blog.id == id).update({**blog.__dict__})
-#     if not blog:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Blog not found !!") 
-#     db.commit()
-#     return 'Done'
+@app.put("/blog/{id}", status_code=status.HTTP_202_ACCEPTED)
+def update(id: int, request_body: UpdateBlog, db: Session = Depends(get_db)):
+    blog = db.query(Blog).filter(Blog.id == id)
+    if not blog.first():
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Blog not found !!")
+    blog.update({**request_body.model_dump(exclude_unset=True)}) # exclude_unset=True removes all those field which are 
+    db.commit()
+    return 'Done'
 
 
