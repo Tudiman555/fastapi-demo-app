@@ -21,3 +21,9 @@ pip install -r requiredments.txt
 ```bash
 uvicorn app.main:app --reload --port 8000
 ```
+
+### Creating Migration 
+
+```bash
+alembic revision --autogenerate -m "Message"
+```
