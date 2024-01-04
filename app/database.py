@@ -8,7 +8,7 @@ url_object = URL.create(
     password="tushar123",  # plain (unescaped) text
     host="localhost",
     database="fastapi_tutorial",
-    port=5432
+    port=5432,
 )
 
 engine = create_engine(url_object)
@@ -16,3 +16,9 @@ engine = create_engine(url_object)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

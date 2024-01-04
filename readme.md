@@ -16,6 +16,25 @@ source fastapi-venv/bin/activate
 pip install -r requiredments.txt
 ```
 
+### Running Migrations 
+
+```bash
+alembic upgrade head
+```
+
+### Downgrading Migrations 
+
+```bash
+alembic downgrade revision_id
+```
+
+### Install pre-commit hooks
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
 ### Starting the Server
 
 ```bash

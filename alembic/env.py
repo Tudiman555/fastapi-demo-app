@@ -21,7 +21,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = Base.metadata # Used for autogenerating migrations 
+target_metadata = Base.metadata  # Used for autogenerating migrations
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -30,7 +30,7 @@ target_metadata = Base.metadata # Used for autogenerating migrations
 
 
 def run_migrations_offline() -> None:
-    print('### Alembic running in offline mode')
+    print("### Alembic running in offline mode")
     """Run migrations in 'offline' mode.
 
     This configures the context with just a URL
@@ -55,7 +55,7 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    print('### Alembic running in online mode')
+    print("### Alembic running in online mode")
     """Run migrations in 'online' mode.
 
     In this scenario we need to create an Engine
@@ -69,7 +69,12 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata, compare_type=True, compare_server_default=True)
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            compare_type=True,
+            compare_server_default=True,
+        )
 
         with context.begin_transaction():
             context.run_migrations()
